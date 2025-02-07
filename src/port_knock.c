@@ -11,7 +11,7 @@
 
 void start_c2() {
     printf("[INFO] Knock correct, lancement du serveur C2...\n");
-    system("./server &"); // Lancer le serveur C2 en arrière-plan
+    system("./server "); // Lancer le serveur C2 en arrière-plan
 }
 
 int main() {
