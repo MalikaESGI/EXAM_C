@@ -111,7 +111,7 @@ sudo LD_PRELOAD=/tmp/hide_logs.so journalctl -xe
     => Les logs liés aux connexions SSH ne doivent plus apparaître.
 
 # /!\######## Problème avec la branche DEV_USER_NON_ROOT
-Une tentative a été faite pour exécuter port_knock sans être root, mais cela a posé des problèmes de clés SSH.
+Une tentative a été faite pour exécuter port_knock sans être root sur la branche DEV_USER_NON_ROOT , mais cela a posé des problèmes de clés SSH.
 
 Même en copiant correctement les clés dans /tmp/ssh, l’authentification ne fonctionnait pas.
 
