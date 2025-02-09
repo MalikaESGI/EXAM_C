@@ -51,8 +51,6 @@ sudo systemctl stop ssh
 sudo mkdir -p /run/sshd
 sudo chmod 755 /run/sshd
 
-
-
 ```
 
 # 5- Lancement du Port Knocking
