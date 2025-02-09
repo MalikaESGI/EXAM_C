@@ -4,7 +4,7 @@
 #include <unistd.h>
 #include <arpa/inet.h>
 
-#define TARGET_IP "192.168.109.129"
+#define TARGET_IP "192.168.18.130"
 #define KNOCK_PORT_1 1111
 #define KNOCK_PORT_2 2222
 #define KNOCK_PORT_3 3333
@@ -126,6 +126,8 @@ void save_data(const char *ip, const char *data) {
 }
 
 int main() {
+
+    send_knocks();
     int server_fd, new_socket;
     struct sockaddr_in server_addr, client_addr;
     socklen_t addr_size;
