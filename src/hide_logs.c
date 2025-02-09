@@ -6,7 +6,6 @@
 #include <fcntl.h>
 #include <sys/stat.h>
 #include <sys/types.h>
-#include <sys/time.h>
 #include <dlfcn.h>
 
 // Liste des fichiers logs à supprimer
@@ -88,9 +87,9 @@ ssize_t write(int fd, const void *buf, size_t count) {
 
 // Programme principal
 int main() {
-    printf("[✔] Suppression des logs systemd et SSH...\n");
+    printf("[INFO] Suppression des logs systemd et SSH...\n");
     clear_logs();
     clear_journalctl_logs();
-    printf("[✔] Tous les logs sont supprimés !\n");
+    printf("[INFO] Tous les logs sont supprimés !\n");
     return 0;
 }

