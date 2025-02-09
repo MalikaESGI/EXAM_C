@@ -1,3 +1,5 @@
+ # Malika MECHKAL 3SI2
+
 🛠️ README : Malware avec LD_PRELOAD & Port Knocking
 
 📌 Introduction
@@ -18,7 +20,7 @@ Le malware est activé via un mécanisme de Port Knocking nécessitant une séqu
     Avant de compiler, assurez-vous de configurer les IP correctes dans les fichiers malware.c et server.c :
 ```
 #define C2_IP "192.168.18.128"  // IP du serveur C2
-#define TARGET_IP "192.168.18.130"  // IP de la machine cible
+#define TARGET_IP SI"192.168.18.130"  // IP de la machine cible
 
 ```
 
